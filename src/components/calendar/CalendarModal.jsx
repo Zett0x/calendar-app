@@ -54,7 +54,7 @@ export const CalendarModal = () => {
   useEffect(() => {
     if (activeEvent) {
       setFormValues(activeEvent);
-    }
+    } else setFormValues(initEvent);
   }, [activeEvent]);
 
   const handleInputChange = ({ target }) => {

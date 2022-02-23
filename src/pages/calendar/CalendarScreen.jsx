@@ -10,7 +10,7 @@ import { CalendarEvent } from "../../components/calendar/CalendarEvent";
 import { CalendarModal } from "../../components/calendar/CalendarModal";
 import { uiOpenModal } from "../../actions/ui";
 import { useDispatch } from "react-redux";
-import { eventSetActive } from "../../actions/events";
+import { eventSetActive, eventSetInactive } from "../../actions/events";
 import { AddNewFab } from "../../components/ui/AddNewFab";
 import { useSelector } from "react-redux";
 
@@ -34,6 +34,10 @@ export const CalendarScreen = () => {
   const onViewChange = (e) => {
     setLastView(e);
     localStorage.setItem("lastView", e);
+  };
+
+  const onSelectSlot = () => {
+    dispatch(eventSetInactive());
   };
 
   const eventStyleGetter = (event, start, end, isSelected) => {
@@ -66,6 +70,8 @@ export const CalendarScreen = () => {
         components={{
           event: CalendarEvent,
         }}
+        onSelectSlot={onSelectSlot}
+        selectable={true}
       />
       <AddNewFab />
       <CalendarModal />
