@@ -13,7 +13,7 @@ import {
   eventSetInactive,
   eventUpdated,
 } from "../../actions/events";
-import { DeleteEventFab } from "../ui/DeleteEventFab";
+//import { DeleteEventFab } from "../ui/DeleteEventFab";
 
 const customStyles = {
   content: {
@@ -121,8 +121,22 @@ export const CalendarModal = () => {
     closeModal();
   };
   const handleDeleteEvent = () => {
-    dispatch(eventDeleted(activeEvent));
-    closeModal();
+    Swal.fire({
+      title: "¿Estás segur@ de que quieres eliminar este evento?",
+      text: "¡No habrá vuelta atrás!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      cancelButtonText: "Cancelar",
+      confirmButtonText: "Sí, elimínalo!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("¡Eliminado!", "El evento ha sido eliminado.", "success");
+        dispatch(eventDeleted(activeEvent));
+        closeModal();
+      }
+    });
   };
 
   return (
