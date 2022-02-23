@@ -1,10 +1,12 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import { eventSetInactive } from "../../actions/events";
 import { uiOpenModal } from "../../actions/ui";
 
 export const AddNewFab = () => {
   const dispatch = useDispatch();
   const handleButtonClick = () => {
+    dispatch(eventSetInactive());
     dispatch(uiOpenModal());
   };
   return (
